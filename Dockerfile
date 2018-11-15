@@ -5,7 +5,7 @@
 FROM python:alpine
 MAINTAINER Thomas Ingvarsson <ingvarsson.thomas@gmail.com>
 
-RUN apk add --no-cache --virtual=build-dependencies ca-certificates && \
+RUN apk add --no-cache --virtual=build-dependencies gcc g++ make libffi-dev openssl-dev ca-certificates && \
     pip install --upgrade setuptools && \
     pip install --upgrade python-telegram-bot && \
     apk del build-dependencies
