@@ -37,10 +37,11 @@ def startCommand(bot, update):
   update.message.reply_text(helpText)
 
 
-def onga(bot, update):
+def ongaCommand(bot, update):
   """Print the image of the one when the true word of /onga is spoken"""
   with open('onga.jpg', 'rb') as photo:
     update.message.reply_photo(photo, 'All are naked in front of the ONE!')
+
 
 # TODO:
 # [] Print message similar to other poll bots inc. options
@@ -56,13 +57,14 @@ def onga(bot, update):
 # [] Multiple active polls
 # [] Add custom polls (other than CS events)
 # [] Add Configurable or random answer options
-def newevent(bot, update):
+def neweventCommand(bot, update):
   """Create a poll as result of command /newevent"""
   titleText = "ON/GA time, 21/11 kl 17.30"
   infoText = "Insert priority here"
 
   message = '{}\n{}'.format(titleText, infoText)
   update.message.reply_text(message)
+
 
 def main():
   """Setup and run ONGAbot"""
@@ -72,10 +74,10 @@ def main():
   dp = updater.dispatcher
 
   # on different commands - answer in Telegram
-  dp.add_handler(CommandHandler("start", start))
-  dp.add_handler(CommandHandler("help", start))
-  dp.add_handler(CommandHandler("onga", onga))
-  dp.add_handler(CommandHandler("newevent", newevent))
+  dp.add_handler(CommandHandler("start", startCommand))
+  dp.add_handler(CommandHandler("help", startCommand))
+  dp.add_handler(CommandHandler("onga", ongaCommand))
+  dp.add_handler(CommandHandler("newevent", neweventCommand))
 
   # log all errors
   dp.add_error_handler(error)
