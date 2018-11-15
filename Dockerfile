@@ -7,7 +7,7 @@ MAINTAINER Thomas Ingvarsson <ingvarsson.thomas@gmail.com>
 
 RUN apk add --no-cache --virtual=build-dependencies ca-certificates && \
     pip install --upgrade setuptools && \
-    pip install aiogram && \
+    pip install --upgrade python-telegram-bot && \
     apk del build-dependencies
 
 COPY src /ongabot
