@@ -3,7 +3,7 @@
 # Version latest
 
 FROM python:alpine
-MAINTAINER Thomas Ingvarsson <ingvarsson.thomas@gmail.com>
+LABEL maintainer Thomas Ingvarsson <ingvarsson.thomas@gmail.com>
 
 RUN apk add --no-cache --virtual=build-dependencies gcc g++ make libffi-dev openssl-dev ca-certificates && \
     pip install --upgrade setuptools && \
