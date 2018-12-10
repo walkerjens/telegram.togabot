@@ -1,7 +1,13 @@
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+
 from telegram.ext import CommandHandler
 
 class NewEventCommandHandler(CommandHandler):
     def __init__(self):
+        # TODO on args
+        # pass_job_queue - should be possible to use to e.g. schedule a reminder message
+        # pass_chat_data - keep data related to the specific chat, how to make it survive bot restarts?
+        # 
         CommandHandler.__init__(self, "newevent", self.neweventCommand)
 
     # TODO:
@@ -24,4 +30,15 @@ class NewEventCommandHandler(CommandHandler):
         infoText = "Insert priority here"
 
         message = '{}\n{}'.format(titleText, infoText)
-        update.message.reply_text(message)
+
+        keyboard = [[InlineKeyboardButton("17.30 - 0", callback_data='1')],
+                    [InlineKeyboardButton("18.30 - 0", callback_data='2')],
+                    [InlineKeyboardButton("19.30 - 0", callback_data='3')],
+                    [InlineKeyboardButton("20.30 - 0", callback_data='4')],
+                    [InlineKeyboardButton("noop - 0", callback_data='5')],
+                    [InlineKeyboardButton("maybe baby - 0", callback_data='6')]]
+
+        reply_markup = InlineKeyboardMarkup(keyboard)
+        update.message.reply_text(message, reply_markup=reply_markup)
+
+        

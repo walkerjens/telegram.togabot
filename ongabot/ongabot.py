@@ -3,7 +3,9 @@
 import logging
 import os
 
-from telegram.ext import Updater
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+
+from telegram.ext import Updater, CallbackQueryHandler
 
 from command.startcommand import StartCommandHandler
 from command.helpcommand import HelpCommandHandler
@@ -21,20 +23,32 @@ def error(bot, update, error):
   """Log Errors caused by Updates."""
   logger.warning('Update "%s" caused error "%s"', update, error)
 
+def button(bot, update):
+    query = update.callback_query
+    editedMessageText = query.message.text + "\nSelected option: {}".format(query.data)
+
+    keyboard = [[InlineKeyboardButton("17.30 - 0", callback_data='1')],
+                [InlineKeyboardButton("18.30 - 0", callback_data='2')],
+                [InlineKeyboardButton("19.30 - 0", callback_data='3')],
+                [InlineKeyboardButton("20.30 - 0", callback_data='4')],
+                [InlineKeyboardButton("noop - 0", callback_data='5')],
+                [InlineKeyboardButton("maybe baby - 0", callback_data='6')]]
+
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    query.edit_message_text(text=editedMessageText,
+                            reply_markup=reply_markup)
+
 def main():
   """Setup and run ONGAbot"""
   updater = Updater(API_TOKEN)
 
   # Get the dispatcher to register handlers
   dp = updater.dispatcher
-
-  # on different commands - answer in Telegram
   dp.add_handler(StartCommandHandler())
   dp.add_handler(HelpCommandHandler())
   dp.add_handler(OngaCommandHandler())
   dp.add_handler(NewEventCommandHandler())
-
-  # log all errors
+  dp.add_handler(CallbackQueryHandler(button))
   dp.add_error_handler(error)
 
   # Start the Bot
