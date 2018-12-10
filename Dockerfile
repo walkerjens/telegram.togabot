@@ -10,7 +10,7 @@ RUN apk add --no-cache --virtual=build-dependencies gcc g++ make libffi-dev open
     pip install --upgrade python-telegram-bot && \
     apk del build-dependencies
 
-COPY src /ongabot
+COPY ongabot /ongabot
 
 ENV API_TOKEN=''
 
