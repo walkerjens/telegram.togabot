@@ -26,8 +26,8 @@ class NewEventCommandHandler(CommandHandler):
   # [] Add Configurable or random answer options
   def neweventCommand(self, bot, update):
     """Create a poll as result of command /newevent"""
-    message = helper.assembleEventHeader("None")
+    message = update.message
+    text = helper.assembleEventHeader("None")
     reply_markup = helper.assembleEventButtons()
-    update.message.reply_text(message, reply_markup=reply_markup)
-
-        
+    message.reply_text(text, quote=False, reply_markup=reply_markup)
+    

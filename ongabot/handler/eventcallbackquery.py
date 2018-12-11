@@ -9,9 +9,12 @@ class EventCallbackQueryHandler(CallbackQueryHandler):
 
   def eventCallback(self, bot, update):
     query = update.callback_query
-    message = helper.assembleEventHeader(query.data)
-    reply_markup = helper.assembleEventButtons()
-    query.edit_message_text(text=message,
-                            reply_markup=reply_markup)
+    if query.data == '6':
+      bot.delete_message(query.message.chat_id, 
+                         query.message.message_id)
 
-        
+    else:
+      text = helper.assembleEventHeader(query.data)
+      reply_markup = helper.assembleEventButtons()
+      query.edit_message_text(text=text,
+                              reply_markup=reply_markup)
