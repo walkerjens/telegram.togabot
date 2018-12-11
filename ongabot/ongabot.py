@@ -3,16 +3,14 @@
 import logging
 import os
 
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import Updater
 
-from telegram.ext import Updater, CallbackQueryHandler
+from handler.startcommand import StartCommandHandler
+from handler.eventcallbackquery import EventCallbackQueryHandler
+from handler.helpcommand import HelpCommandHandler
+from handler.neweventcommand import NewEventCommandHandler
+from handler.ongacommand import OngaCommandHandler
 
-from command.startcommand import StartCommandHandler
-from command.helpcommand import HelpCommandHandler
-from command.neweventcommand import NewEventCommandHandler
-from command.ongacommand import OngaCommandHandler
-
-API_TOKEN = os.environ['API_TOKEN']
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
@@ -23,23 +21,10 @@ def error(bot, update, error):
   """Log Errors caused by Updates."""
   logger.warning('Update "%s" caused error "%s"', update, error)
 
-def button(bot, update):
-    query = update.callback_query
-    editedMessageText = query.message.text + "\nSelected option: {}".format(query.data)
-
-    keyboard = [[InlineKeyboardButton("17.30 - 0", callback_data='1')],
-                [InlineKeyboardButton("18.30 - 0", callback_data='2')],
-                [InlineKeyboardButton("19.30 - 0", callback_data='3')],
-                [InlineKeyboardButton("20.30 - 0", callback_data='4')],
-                [InlineKeyboardButton("noop - 0", callback_data='5')],
-                [InlineKeyboardButton("maybe baby - 0", callback_data='6')]]
-
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    query.edit_message_text(text=editedMessageText,
-                            reply_markup=reply_markup)
 
 def main():
   """Setup and run ONGAbot"""
+  API_TOKEN = os.environ['API_TOKEN']
   updater = Updater(API_TOKEN)
 
   # Get the dispatcher to register handlers
@@ -48,7 +33,7 @@ def main():
   dp.add_handler(HelpCommandHandler())
   dp.add_handler(OngaCommandHandler())
   dp.add_handler(NewEventCommandHandler())
-  dp.add_handler(CallbackQueryHandler(button))
+  dp.add_handler(EventCallbackQueryHandler())
   dp.add_error_handler(error)
 
   # Start the Bot

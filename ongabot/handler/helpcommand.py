@@ -1,4 +1,4 @@
-import command.helper as helper
+import handler.helper as helper
 
 from telegram.ext import CommandHandler
 

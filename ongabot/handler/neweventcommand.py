@@ -1,4 +1,4 @@
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+import handler.helper as helper
 
 from telegram.ext import CommandHandler
 
@@ -26,19 +26,8 @@ class NewEventCommandHandler(CommandHandler):
   # [] Add Configurable or random answer options
   def neweventCommand(self, bot, update):
     """Create a poll as result of command /newevent"""
-    titleText = "ON/GA time, 21/11 kl 17.30"
-    infoText = "Insert priority here"
-
-    message = '{}\n{}'.format(titleText, infoText)
-
-    keyboard = [[InlineKeyboardButton("17.30 - 0", callback_data='1')],
-                [InlineKeyboardButton("18.30 - 0", callback_data='2')],
-                [InlineKeyboardButton("19.30 - 0", callback_data='3')],
-                [InlineKeyboardButton("20.30 - 0", callback_data='4')],
-                [InlineKeyboardButton("noop - 0", callback_data='5')],
-                [InlineKeyboardButton("maybe baby - 0", callback_data='6')]]
-                
-    reply_markup = InlineKeyboardMarkup(keyboard)
+    message = helper.assembleEventHeader("None")
+    reply_markup = helper.assembleEventButtons()
     update.message.reply_text(message, reply_markup=reply_markup)
 
         
