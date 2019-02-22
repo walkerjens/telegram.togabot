@@ -1,10 +1,9 @@
 import logging
 
-import handler.helper as helper
-
 from telegram import Update
-from telegram.ext import CallbackContext
-from telegram.ext import CallbackQueryHandler
+from telegram.ext import CallbackQueryHandler, CallbackContext
+
+import handler.helper as helper
 
 
 class EventCallbackQueryHandler(CallbackQueryHandler):

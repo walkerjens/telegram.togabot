@@ -1,8 +1,7 @@
-import handler.helper as helper
-
 from telegram import Update
-from telegram.ext import CallbackContext
-from telegram.ext import CommandHandler
+from telegram.ext import CommandHandler, CallbackContext
+
+import handler.helper as helper
 
 
 class NewEventCommandHandler(CommandHandler):

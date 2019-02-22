@@ -3,8 +3,7 @@
 import logging
 import os
 
-from telegram.ext import PicklePersistence
-from telegram.ext import Updater
+from telegram.ext import PicklePersistence, Updater
 
 from handler.startcommand import StartCommandHandler
 from handler.eventcallbackquery import EventCallbackQueryHandler
@@ -27,7 +26,7 @@ def error(update, context):
 def main():
     """Setup and run ONGAbot"""
     API_TOKEN = os.environ["API_TOKEN"]
-    my_persistence = PicklePersistence(filename='ongabot.db')
+    my_persistence = PicklePersistence(filename="ongabot.db")
     updater = Updater(API_TOKEN, persistence=my_persistence, use_context=True)
 
     # Get the dispatcher to register handlers
