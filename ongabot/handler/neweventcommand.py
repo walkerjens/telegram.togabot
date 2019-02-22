@@ -6,10 +6,6 @@ import handler.helper as helper
 
 class NewEventCommandHandler(CommandHandler):
     def __init__(self):
-        # TODO on args
-        # pass_job_queue - should be possible to use to e.g. schedule a reminder message
-        # pass_chat_data - keep data related to the specific chat, how to make it survive bot restarts?
-        #
         CommandHandler.__init__(self, "newevent", self.neweventCommand)
 
     # TODO:
