@@ -1,6 +1,3 @@
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
-
-
 def assembleEventHeader(selected):
     titleText = "ON/GA time, 21/11 kl 17.30"
     infoText = "Insert priority here"
@@ -10,17 +7,16 @@ def assembleEventHeader(selected):
 
 
 def assembleEventButtons():
-    keyboard = [
-        [InlineKeyboardButton("17.30 - 0", callback_data="1")],
-        [InlineKeyboardButton("18.30 - 0", callback_data="2")],
-        [InlineKeyboardButton("19.30 - 0", callback_data="3")],
-        [InlineKeyboardButton("20.30 - 0", callback_data="4")],
-        [InlineKeyboardButton("noop - 0", callback_data="5")],
-        [InlineKeyboardButton("maybe baby - 0", callback_data="6")],
+    options = [
+        "17.30",
+        "18.30",
+        "19.30",
+        "20.30",
+        "noop",
+        "maybe baby",
     ]
 
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    return reply_markup
+    return options
 
 
 def helpText():

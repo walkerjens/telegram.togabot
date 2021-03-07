@@ -26,6 +26,5 @@ class NewEventCommandHandler(CommandHandler):
         """Create a poll as result of command /newevent"""
         message = update.message
         text = helper.assembleEventHeader("None")
-        reply_markup = helper.assembleEventButtons()
-        message.reply_text(text, quote=False, reply_markup=reply_markup)
-
+        options = helper.assembleEventButtons()
+        message.reply_poll(text, options=options, quote=False, is_anonymous=False, allows_multiple_answers=True)
