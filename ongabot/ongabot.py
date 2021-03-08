@@ -24,8 +24,9 @@ def error(update, context):
 
 def main():
     """Setup and run ONGAbot"""
-    API_TOKEN = os.environ["API_TOKEN"]
-    pp = PicklePersistence(filename="ongabot.db")
+    API_TOKEN = os.getenv("API_TOKEN")
+    DB_PATH = os.getenv("DB_PATH", "ongabot.db")
+    pp = PicklePersistence(filename=DB_PATH)
     updater = Updater(API_TOKEN, persistence=pp, use_context=True)
 
     # Get the dispatcher to register handlers
