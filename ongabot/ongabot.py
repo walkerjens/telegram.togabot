@@ -6,7 +6,6 @@ import os
 from telegram.ext import PicklePersistence, Updater
 
 from handler.startcommand import StartCommandHandler
-from handler.eventcallbackquery import EventCallbackQueryHandler
 from handler.helpcommand import HelpCommandHandler
 from handler.neweventcommand import NewEventCommandHandler
 from handler.ongacommand import OngaCommandHandler
@@ -35,7 +34,6 @@ def main():
     dp.add_handler(HelpCommandHandler())
     dp.add_handler(OngaCommandHandler())
     dp.add_handler(NewEventCommandHandler())
-    dp.add_handler(EventCallbackQueryHandler())
     dp.add_error_handler(error)
 
     # Start the Bot
