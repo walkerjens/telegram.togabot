@@ -1,24 +1,3 @@
-def assembleEventHeader(selected):
-    titleText = "ON/GA time, 21/11 kl 17.30"
-    infoText = "Insert priority here"
-    selectionText = "Selected: {}".format(selected)
-    message = "{}\n{}\n{}".format(titleText, infoText, selectionText)
-    return message
-
-
-def assembleEventButtons():
-    options = [
-        "17.30",
-        "18.30",
-        "19.30",
-        "20.30",
-        "noop",
-        "maybe baby",
-    ]
-
-    return options
-
-
 def helpText():
     """Print the help text for a /start or /help command"""
     helpText = (
@@ -38,4 +17,3 @@ def helpText():
     )
 
     return helpText
-
