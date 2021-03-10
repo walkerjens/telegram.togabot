@@ -10,6 +10,7 @@ from handler.helpcommand import HelpCommandHandler
 from handler.neweventcommand import NewEventCommandHandler
 from handler.ongacommand import OngaCommandHandler
 from handler.eventpollhandler import EventPollHandler
+from handler.eventpollanswerhandler import EventPollAnswerHandler
 
 
 logging.basicConfig(
@@ -37,6 +38,7 @@ def main():
     dp.add_handler(OngaCommandHandler())
     dp.add_handler(NewEventCommandHandler())
     dp.add_handler(EventPollHandler())
+    dp.add_handler(EventPollAnswerHandler())
     dp.add_error_handler(error)
 
     # Start the Bot

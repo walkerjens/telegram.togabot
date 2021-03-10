@@ -13,4 +13,10 @@ class EventPollHandler(PollHandler):
         logger = logging.getLogger()
         logger.info("ENTER: PollHandler callback")
         logger.info("update content:")
-        logger.info("{}".format(update.message))
+        logger.info("{}".format(update))
+        logger.info("context.bot_data")
+        logger.info("{}".format(context.bot_data))
+        logger.info("{}".format(context.bot_data[update.poll.id]["poll"]))
+        context.bot_data[update.poll.id]["poll"] = update.poll
+        logger.info("{}".format(context.bot_data))
+        logger.info("{}".format(context.bot_data[update.poll.id]["poll"]))
