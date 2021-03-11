@@ -1,4 +1,5 @@
 import logging
+from datetime import date, timedelta
 
 from telegram import Update
 from telegram.ext import CommandHandler, CallbackContext
@@ -44,7 +45,7 @@ class NewEventCommandHandler(CommandHandler):
 
 def generateText():
     titleText = "Event: ONGA"
-    whenText = "When: <insert date>"
+    whenText = f"When: {getUpcomingWednesdayDate(date.today())}"
     statusText = (
         "<insert text about current size of squad or number of missing players>"
     )
@@ -63,3 +64,9 @@ def generateOptions():
     ]
 
     return options
+
+
+def getUpcomingWednesdayDate(today):
+    wednesday_day_of_week_index = 2  # 0-6, 0 is monday and 6 is sunday
+    next_wednesday_date = today + timedelta((wednesday_day_of_week_index - today.weekday()) % 7)
+    return next_wednesday_date
