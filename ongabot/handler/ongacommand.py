@@ -10,4 +10,3 @@ class OngaCommandHandler(CommandHandler):
         """Print the image of the one when the true word of /onga is spoken"""
         with open("onga.jpg", "rb") as photo:
             update.message.reply_photo(photo, "All are naked in front of the ONE!")
-

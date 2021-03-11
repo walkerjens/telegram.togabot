@@ -28,9 +28,7 @@ class EventPollAnswerHandler(PollAnswerHandler):
 
         context.bot.send_message(
             context.bot_data[update.poll_answer.poll_id]["chat_id"],
-            "Wow {}, what a great job answering that poll!".format(
-                user_data["user"].name
-            ),
+            "Wow {}, what a great job answering that poll!".format(user_data["user"].name),
         )
 
         logger.debug("context.user_data")

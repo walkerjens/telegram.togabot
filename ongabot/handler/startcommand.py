@@ -11,4 +11,3 @@ class StartCommandHandler(CommandHandler):
     def startCommand(self, update: Update, context: CallbackContext):
         """Print the help text for a /start or /help command"""
         update.message.reply_text(helper.helpText())
-

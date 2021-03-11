@@ -46,10 +46,7 @@ class NewEventCommandHandler(CommandHandler):
 def generateText():
     titleText = "Event: ONGA"
     whenText = f"When: {getUpcomingWednesdayDate(date.today())}"
-    statusText = (
-        "<insert text about current size of squad or number of missing players>"
-    )
-    message = "{}\n{}\n{}".format(titleText, whenText, statusText)
+    statusText = "<insert text about current size of squad or number of missing players>"    message = "{}\n{}\n{}".format(titleText, whenText, statusText)
     return message
 
 
