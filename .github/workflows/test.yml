@@ -10,30 +10,36 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  test:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Set up Python 3.9
       uses: actions/setup-python@v2
       with:
         python-version: 3.9
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install -r requirements-dev.txt
+
     - name: Lint with black
       run: |
         make black-check
+
     - name: Lint with flake8
       run: |
         make pep8
+
     - name: Lint with pylint
       run: |
         make lint
+
     - name: Test with pytest
       run: |
         make test
