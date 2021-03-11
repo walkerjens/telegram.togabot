@@ -11,9 +11,21 @@ class EventPollAnswerHandler(PollAnswerHandler):
     def callback(self, update: Update, context: CallbackContext):
         """Handle an poll update"""
         logger = logging.getLogger()
-        logger.info("ENTER: PollAnswerHandler callback")
-        logger.info("update content:")
-        logger.info("{}".format(update))
-        logger.info("context.chat_data:")
-        logger.info("{}".format(context.bot_data))
-        logger.info("{}".format(context.user_data))
+        logger.debug("ENTER: EventPollAnswerHandler::callback")
+        logger.debug("update:")
+        logger.debug("{}".format(update))
+
+        # Store poll answer in user_data
+        user_data = {
+            "user": update.poll_answer.user,
+            "poll_answers": {
+                update.poll_answer.poll_id: {
+                    "poll_answer": update.poll_answer.option_ids,
+                },
+            },
+        }
+        context.user_data.update(user_data)
+
+        logger.debug("context.user_data")
+        logger.debug("{}".format(context.user_data))
+        logger.debug("EXIT: EventPollAnswerHandler::callback")

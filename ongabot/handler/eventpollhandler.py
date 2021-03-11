@@ -11,12 +11,15 @@ class EventPollHandler(PollHandler):
     def callback(self, update: Update, context: CallbackContext):
         """Handle an poll update"""
         logger = logging.getLogger()
-        logger.info("ENTER: PollHandler callback")
-        logger.info("update content:")
-        logger.info("{}".format(update))
-        logger.info("context.bot_data")
-        logger.info("{}".format(context.bot_data))
-        logger.info("{}".format(context.bot_data[update.poll.id]["poll"]))
-        context.bot_data[update.poll.id]["poll"] = update.poll
-        logger.info("{}".format(context.bot_data))
-        logger.info("{}".format(context.bot_data[update.poll.id]["poll"]))
+        logger.debug("ENTER: EventPollHandler::callback")
+        logger.debug("update:")
+        logger.debug("{}".format(update))
+
+        # Update stored poll_data
+        poll_data = context.bot_data[update.poll.id]
+        poll_data["poll"] = update.poll
+        context.bot_data.update(poll_data)
+
+        logger.debug("context.bot_data")
+        logger.debug("{}".format(context.bot_data))
+        logger.debug("EXIT: EventPollHandler::callback")

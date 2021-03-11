@@ -6,10 +6,15 @@ from telegram.ext import CommandHandler, CallbackContext
 
 class NewEventCommandHandler(CommandHandler):
     def __init__(self):
-        CommandHandler.__init__(self, "newevent", self.neweventCommand)
+        CommandHandler.__init__(self, "newevent", self.callback)
 
-    def neweventCommand(self, update: Update, context: CallbackContext):
+    def callback(self, update: Update, context: CallbackContext):
         """Create a poll as result of command /newevent"""
+        logger = logging.getLogger()
+        logger.debug("ENTER: NewEventCommandHandler::callback")
+        logger.debug("update:")
+        logger.debug("{}".format(update))
+
         text = generateText()
         options = generateOptions()
         message = context.bot.send_poll(
@@ -20,6 +25,9 @@ class NewEventCommandHandler(CommandHandler):
             allows_multiple_answers=True,
         )
 
+        logger.debug("message:")
+        logger.debug("{}".format(message))
+
         # Store the new poll in bot_data
         poll_data = {
             message.poll.id: {
@@ -28,10 +36,10 @@ class NewEventCommandHandler(CommandHandler):
             }
         }
         context.bot_data.update(poll_data)
-        logger = logging.getLogger()
-        logger.info("message content:")
-        logger.info("{}".format(message))
-        logger.info("{}".format(context.bot_data))
+
+        logger.debug("context.bot_data")
+        logger.debug("{}".format(context.bot_data))
+        logger.debug("EXIT: NewEventCommandHandler::callback")
 
 
 def generateText():
