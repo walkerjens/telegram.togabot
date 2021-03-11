@@ -14,7 +14,8 @@ from handler.eventpollanswerhandler import EventPollAnswerHandler
 
 
 logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
+    level=os.environ.get("LOG_LEVEL", "INFO").upper(),
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
 logger = logging.getLogger(__name__)
 
@@ -26,22 +27,21 @@ def error(update, context):
 
 def main():
     """Setup and run ONGAbot"""
-    API_TOKEN = os.getenv("API_TOKEN")
-    DB_PATH = os.getenv("DB_PATH", "ongabot.db")
-    pp = PicklePersistence(filename=DB_PATH)
-    updater = Updater(API_TOKEN, persistence=pp, use_context=True)
+    persistence = PicklePersistence(filename=os.getenv("DB_PATH", "ongabot.db"))
 
-    # Get the dispatcher to register handlers
-    dp = updater.dispatcher
-    dp.add_handler(StartCommandHandler())
-    dp.add_handler(HelpCommandHandler())
-    dp.add_handler(OngaCommandHandler())
-    dp.add_handler(NewEventCommandHandler())
-    dp.add_handler(EventPollHandler())
-    dp.add_handler(EventPollAnswerHandler())
-    dp.add_error_handler(error)
+    updater = Updater(os.getenv("API_TOKEN"), persistence=persistence, use_context=True)
 
-    # Start the Bot
+    # Register handlers
+    dispatcher = updater.dispatcher
+    dispatcher.add_handler(StartCommandHandler())
+    dispatcher.add_handler(HelpCommandHandler())
+    dispatcher.add_handler(OngaCommandHandler())
+    dispatcher.add_handler(NewEventCommandHandler())
+    dispatcher.add_handler(EventPollHandler())
+    dispatcher.add_handler(EventPollAnswerHandler())
+    dispatcher.add_error_handler(error)
+
+    # Start the bot
     updater.start_polling()
 
     # Block until you press Ctrl-C or the process receives SIGINT, SIGTERM or
