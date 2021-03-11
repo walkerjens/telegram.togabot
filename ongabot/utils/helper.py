@@ -1,6 +1,9 @@
-def helpText():
+"""This module contains helper functions."""
+
+
+def create_help_text():
     """Print the help text for a /start or /help command"""
-    helpText = (
+    text = (
         "Welcome traveler, my name is ONGAbot.\n"
         "I'm the one and only, the truth speaker.\n"
         "\n"
@@ -16,4 +19,4 @@ def helpText():
         "/newevent - Create a new event, args=TBD\n"
     )
 
-    return helpText
+    return text

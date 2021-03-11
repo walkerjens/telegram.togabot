@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
+"""An application that runs a telegram bot called ONGAbot"""
 
 import logging
 import os
 
 from telegram.ext import PicklePersistence, Updater
 
-from handler.startcommand import StartCommandHandler
-from handler.helpcommand import HelpCommandHandler
-from handler.neweventcommand import NewEventCommandHandler
-from handler.ongacommand import OngaCommandHandler
-from handler.eventpollhandler import EventPollHandler
-from handler.eventpollanswerhandler import EventPollAnswerHandler
+from handler import EventPollAnswerHandler
+from handler import EventPollHandler
+from handler import HelpCommandHandler
+from handler import NewEventCommandHandler
+from handler import OngaCommandHandler
+from handler import StartCommandHandler
 
 
 logging.basicConfig(
