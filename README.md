@@ -8,13 +8,23 @@ Built on [python-telegram-bot](https://github.com/python-telegram-bot/python-tel
 
 For code formatting `black` is used, together with `flake8` and `pylint` for linting.
 
-To run them simply do
+Run locally to format with
 
 ```bash
 > make black
 black .
 All done! ✨ 🍰 ✨
 13 files left unchanged.
+
+```
+
+Run locally to check code with
+
+```bash
+> make black-check
+black . --diff --check
+All done! ✨ 🍰 ✨
+13 files would be left unchanged.
 
 > make pep8
 flake8 ongabot tests
@@ -32,11 +42,15 @@ Your code has been rated at 10.00/10 (previous run: 10.00/10, +0.00)
 Tests are located under `tests`. Run tests locally with
 
 ```bash
-> PYTHONPATH=$PYTHONPATH:./ongabot python -m unittest
-.
-----------------------------------------------------------------------
-Ran 1 test in 0.000s
+> make test
+==================================================== test session starts ====================================================
+platform linux -- Python 3.9.2, pytest-6.2.2, py-1.10.0, pluggy-0.13.1 -- /home/silly/git/tingvarsson/telegram.ongabot/venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/silly/git/tingvarsson/telegram.ongabot
+collected 1 item
 
-OK
+tests/test_neweventcommand.py::NewEventCommandTest::test_getUpcomingWednesdayDate PASSED                              [100%]
+
+===================================================== 1 passed in 0.13s =====================================================
 
 ```
