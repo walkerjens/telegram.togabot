@@ -9,7 +9,7 @@ API_TOKEN=OVERRIDE_ME
 DOCKER_IMAGE=tingvarsson/telegram.ongabot:latest
 VENV_PATH=venv
 
-.PHONY: venv install run lint pep8 black clean docker-build docker-run
+.PHONY: venv install run lint pep8 black black-check clean docker-build docker-run
 
 venv:
 	$(PYTHON) -m venv $(VENV_PATH)
@@ -30,6 +30,9 @@ pep8:
 
 black:
 	$(BLACK) .
+
+black-check:
+	$(BLACK) . --diff --check
 
 clean:
 	rm -rf $(VENV_PATH)

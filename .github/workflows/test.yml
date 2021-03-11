@@ -25,6 +25,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install -r requirements-dev.txt
+    - name: Lint with black
+      run: |
+        make black-check
     - name: Lint with flake8
       run: |
         make pep8
