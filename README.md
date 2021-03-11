@@ -5,10 +5,10 @@ Built on [python-telegram-bot](https://github.com/python-telegram-bot/python-tel
 
 
 ## Tests
-Tests are located under `ongabot/tests`. Run tests locally with
+Tests are located under `tests`. Run tests locally with
 
 ```
-ongabot> python -m unittest
+> PYTHONPATH=$PYTHONPATH:./ongabot python -m unittest
 .
 ----------------------------------------------------------------------
 Ran 1 test in 0.000s

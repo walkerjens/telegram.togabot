@@ -1,13 +1,17 @@
+"""This module contains the StartCommandHandler class."""
 from telegram import Update
-from telegram.ext import CommandHandler, CallbackContext
+from telegram.ext import CommandHandler
 
-import handler.helper as helper
+import utils.helper as helper
 
 
 class StartCommandHandler(CommandHandler):
-    def __init__(self):
-        CommandHandler.__init__(self, "start", self.startCommand)
+    """Handler for /start command"""
 
-    def startCommand(self, update: Update, context: CallbackContext):
-        """Print the help text for a /start or /help command"""
-        update.message.reply_text(helper.helpText())
+    def __init__(self):
+        CommandHandler.__init__(self, "start", callback)
+
+
+def callback(update: Update):
+    """Print the help text for a /start or /help command"""
+    update.message.reply_text(helper.create_help_text())
