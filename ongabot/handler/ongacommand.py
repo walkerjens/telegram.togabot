@@ -7,7 +7,7 @@ class OngaCommandHandler(CommandHandler):
     """Handler for /onga command"""
 
     def __init__(self):
-        CommandHandler.__init__(self, "onga", callback)
+        CommandHandler.__init__(self, "onga", callback=callback)
 
 
 def callback(update: Update):
