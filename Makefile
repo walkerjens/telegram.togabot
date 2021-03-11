@@ -2,8 +2,9 @@ DOCKER:=docker
 PYTHON:=python3
 PIP:=pip3
 PYLINT=pylint
-PEP8:= flake8
-BLACK:= black
+PEP8:=flake8
+BLACK:=black
+PYTEST:=pytest
 
 API_TOKEN=OVERRIDE_ME
 DOCKER_IMAGE=tingvarsson/telegram.ongabot:latest
@@ -33,6 +34,9 @@ black:
 
 black-check:
 	$(BLACK) . --diff --check
+
+test:
+	PYTHONPATH=$PYTHONPATH:./ongabot $(PYTEST) -v
 
 clean:
 	rm -rf $(VENV_PATH)
