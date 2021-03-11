@@ -10,6 +10,8 @@ API_TOKEN=OVERRIDE_ME
 DOCKER_IMAGE=tingvarsson/telegram.ongabot:latest
 VENV_PATH=venv
 
+export PYTHONPATH=$PYTHONPATH:./ongabot
+
 .PHONY: venv install run lint pep8 black black-check clean docker-build docker-run
 
 venv:
@@ -24,7 +26,7 @@ run:
 	cd ongabot && API_TOKEN=$(API_TOKEN) $(PYTHON) ongabot.py
 
 lint:
-	PYTHONPATH=$PYTHONPATH:./ongabot $(PYLINT) ongabot
+	$(PYLINT) ongabot
 
 pep8:
 	$(PEP8) ongabot tests
@@ -36,7 +38,7 @@ black-check:
 	$(BLACK) . --diff --check
 
 test:
-	PYTHONPATH=$PYTHONPATH:./ongabot $(PYTEST) -v
+	$(PYTEST) -v
 
 clean:
 	rm -rf $(VENV_PATH)
