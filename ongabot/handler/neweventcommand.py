@@ -49,8 +49,7 @@ def create_poll_text():
     """Create text field for poll"""
     title = "Event: ONGA"
     when = f"When: {get_upcoming_wednesday_date(date.today())}"
-    status = "<insert text about current size of squad or number of missing players>"
-    message = "{}\n{}\n{}".format(title, when, status)
+    message = f"{title}\n{when}"
     return message
 
 
