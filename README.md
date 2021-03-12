@@ -30,7 +30,7 @@ All done! ✨ 🍰 ✨
 flake8 ongabot tests
 
 > make lint
-PYTHONPATH=YTHONPATH:./ongabot pylint ongabot
+pylint ongabot
 
 --------------------------------------------------------------------
 Your code has been rated at 10.00/10 (previous run: 10.00/10, +0.00)
@@ -43,6 +43,7 @@ Tests are located under `tests`. Run tests locally with
 
 ```bash
 > make test
+pytest -v
 ==================================================== test session starts ====================================================
 platform linux -- Python 3.9.2, pytest-6.2.2, py-1.10.0, pluggy-0.13.1 -- /home/silly/git/tingvarsson/telegram.ongabot/venv/bin/python3
 cachedir: .pytest_cache
