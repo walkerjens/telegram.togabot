@@ -1,6 +1,6 @@
 """This module contains the OngaCommandHandler class."""
 from telegram import Update
-from telegram.ext import CommandHandler
+from telegram.ext import CommandHandler, CallbackContext
 
 
 class OngaCommandHandler(CommandHandler):
@@ -10,7 +10,7 @@ class OngaCommandHandler(CommandHandler):
         CommandHandler.__init__(self, "onga", callback=callback)
 
 
-def callback(update: Update):
+def callback(update: Update, _: CallbackContext):
     """Print the image of the one when the true word of /onga is spoken"""
     with open("onga.jpg", "rb") as photo:
         update.message.reply_photo(photo, "All are naked in front of the ONE!")
