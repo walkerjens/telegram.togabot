@@ -14,9 +14,9 @@ def create_help_text():
         " - Condemn the wicked\n"
         "\n"
         "Commandments:\n"
-        "/help - To show this very helpful text\n"
-        "/onga - Print the image of the one\n"
-        "/newevent - Create a new event, args=TBD\n"
+        "/help - Get some aid in needing times\n"
+        "/onga - This is the way, let me show you\n"
+        "/newevent - Create a new event corresponding to upcoming Wednesday\n"
     )
 
     return text
