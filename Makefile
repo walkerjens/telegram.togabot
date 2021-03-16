@@ -5,6 +5,7 @@ PYLINT=pylint
 PEP8:=flake8
 BLACK:=black
 PYTEST:=pytest
+MYPY:=mypy
 
 API_TOKEN=OVERRIDE_ME
 DOCKER_IMAGE=tingvarsson/telegram.ongabot:latest
@@ -12,7 +13,7 @@ VENV_PATH=venv
 
 export PYTHONPATH=$PYTHONPATH:./ongabot
 
-.PHONY: venv install run lint pep8 black black-check clean docker-build docker-run
+.PHONY: venv install run lint pep8 mypy black-check check black test clean docker-build docker-run
 
 venv:
 	$(PYTHON) -m venv $(VENV_PATH)
@@ -31,11 +32,16 @@ lint:
 pep8:
 	$(PEP8) ongabot tests
 
-black:
-	$(BLACK) .
+mypy:
+	$(MYPY) -p ongabot
 
 black-check:
 	$(BLACK) . --diff --check
+
+check: black-check lint pep8 mypy
+
+black:
+	$(BLACK) .
 
 test:
 	$(PYTEST) -v
