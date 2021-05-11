@@ -78,10 +78,10 @@ def create_poll_text() -> str:
 def create_poll_options() -> list[str]:
     """Create options for poll"""
     options = [
-        "17.30",
-        "18.30",
-        "19.30",
-        "20.30",
+        "18.00",
+        "19.00",
+        "20.00",
+        "21.00",
         "No-op",
         "Maybe Baby <3",
     ]
