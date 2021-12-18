@@ -13,6 +13,8 @@ from handler import NewEventCommandHandler
 from handler import CancelEventCommandHandler
 from handler import OngaCommandHandler
 from handler import StartCommandHandler
+from handler import ScheduleCommandHandler
+from handler import DeScheduleCommandHandler
 
 
 logging.basicConfig(
@@ -42,6 +44,8 @@ def main() -> None:
     dispatcher.add_handler(CancelEventCommandHandler())
     dispatcher.add_handler(EventPollHandler())
     dispatcher.add_handler(EventPollAnswerHandler())
+    dispatcher.add_handler(ScheduleCommandHandler())
+    dispatcher.add_handler(DeScheduleCommandHandler())
     dispatcher.add_error_handler(error)
 
     # Start the bot
