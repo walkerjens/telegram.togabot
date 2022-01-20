@@ -3,6 +3,7 @@ import logging
 from telegram import Update
 from telegram.ext import CommandHandler, CallbackContext
 
+from chat import Chat
 from utils.log import log
 
 _logger = logging.getLogger(__name__)
@@ -17,18 +18,11 @@ class DeScheduleCommandHandler(CommandHandler):
 
 @log
 def callback(update: Update, context: CallbackContext) -> None:
-    """Cancels existing jobs"""
-    _logger.debug("update:\n%s", update)
-
-    current_jobs = context.job_queue.get_jobs_by_name("Weekly scheduled poll creation job")
-
-    if not current_jobs:
-        update.message.reply_text("No jobs to cancel")
-        return
-
-    for job in current_jobs:
-        job.schedule_removal()
+    """Cancel existing event job in chat"""
+    chat: Chat = context.bot_data.get_chat(update.effective_chat.id)
+    if not chat.remove_event_job(context.job_queue):
+        update.message.reply_text("No jobs to cancel.")
 
     update.message.reply_text(
-        "Job cancelled successfully. Polls will no longer be automatically created"
+        "Job cancelled successfully. Polls will no longer be automatically created."
     )

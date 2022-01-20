@@ -1,31 +1,55 @@
-"""This module contains functions to handle bot_data."""
+"""This module contains the BotData class."""
 import logging
-from typing import Dict
+from typing import Callable, Dict
 
+from telegram.ext import JobQueue
+
+from chat import Chat
 from event import Event
-from utils.log import log
+from utils import log
 
 
 _logger = logging.getLogger(__name__)
 
 
-@log
-def add_event(bot_data: Dict, key: str, value: Event) -> bool:
-    """Add an item to bot_data"""
-    if bot_data.get(key):
-        _logger.error("key=%s already exist in bot_data!", key)
-        return False
+class BotData:
+    """
+    The BotData object represent all persistent data stored for the bot
 
-    bot_data.update({key: value})
-    _logger.debug("bot_data:\n%s", bot_data)
-    return True
+    Args:
 
+    Attributes:
+        chats: Dict of Chat objects indexed by chat_id
+    """
 
-@log
-def get_event(bot_data: Dict, key: str) -> Event:
-    """Get an item from bot_data"""
-    if bot_data.get(key) is None:
-        _logger.error("key=%s doesn't exist in bot_data!", key)
+    def __init__(self) -> None:
+        self.chats: Dict[int, Chat] = {}
+
+    def __repr__(self) -> str:
+        return str(self.__class__) + ": " + str(self.__dict__)
+
+    @log.method
+    def get_chat(self, chat_id: int) -> Chat:
+        """Get a Chat from BotData"""
+        # Create a Chat object for chat_id if not found
+        if not self.chats.get(chat_id):
+            self.chats.update({chat_id: Chat(chat_id)})
+
+        return self.chats.get(chat_id)
+
+    @log.method
+    def get_event(self, poll_id: str) -> Event:
+        """Get an event from BotData"""
+        for chat in self.chats.values():
+            event = chat.get_event(poll_id)
+            if event:
+                return event
+
+        _logger.error("Event with poll_id=%s doesn't exist in BotData!", poll_id)
         return None
 
-    return bot_data[key]
+    @log.method
+    def schedule_all_event_jobs(self, job_queue: JobQueue, callback: Callable) -> None:
+        """Schedule all event jobs, in all chats"""
+        for chat in self.chats.values():
+            chat.schedule_event_job(job_queue, callback)

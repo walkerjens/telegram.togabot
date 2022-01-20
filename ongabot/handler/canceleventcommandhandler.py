@@ -1,9 +1,10 @@
 """This module contains the CancelEventCommandHandler class."""
 import logging
 
-from telegram import TelegramError, Update
+from telegram import Update
 from telegram.ext import CommandHandler, CallbackContext
 
+from chat import Chat
 from utils.log import log
 
 
@@ -21,7 +22,8 @@ class CancelEventCommandHandler(CommandHandler):
 def callback(update: Update, context: CallbackContext) -> None:
     """Cancel active event as result of command /cancelevent"""
     # Retrieve currently pinned message
-    pinned_poll = context.chat_data.get("pinned_poll_msg")
+    chat: Chat = context.bot_data.get_chat(update.effective_chat.id)
+    pinned_poll = chat.get_pinned_poll()
 
     if pinned_poll is None:
         context.bot.send_message(
@@ -31,12 +33,7 @@ def callback(update: Update, context: CallbackContext) -> None:
         _logger.debug("Tried to cancel without existing event.")
         return
 
-    try:
-        pinned_poll.unpin()
-    except TelegramError:
-        _logger.warning("Failed trying to unpin message (message_id=%i).", pinned_poll.message_id)
-
-    context.chat_data["pinned_poll_msg"] = None
+    chat.remove_pinned_poll()
 
     context.bot.send_message(
         update.effective_chat.id,
