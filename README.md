@@ -1,6 +1,6 @@
 # togabot
 
-The one and only TO/GA Telegram bot, available on Docker Hub ([miffeltoffel/telegram.togabot](https://hub.docker.com/r/miffeltoffel/telegram.togabot/))
+The one and only TO/GA Telegram bot, available on Docker Hub ([walkerjens/telegram.togabot](https://hub.docker.com/r/walkerjens/telegram.togabot/))
 
 Built on [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)
 
@@ -67,9 +67,9 @@ Tests are located under `tests`. Run tests locally with
 > make test
 pytest -v
 ==================================================== test session starts ====================================================
-platform linux -- Python 3.9.2, pytest-6.2.2, py-1.10.0, pluggy-0.13.1 -- /home/jens/git/miffeltoffel/telegram.togabot/venv/bin/python3
+platform linux -- Python 3.9.2, pytest-6.2.2, py-1.10.0, pluggy-0.13.1 -- /home/jens/git/walkerjens/telegram.togabot/venv/bin/python3
 cachedir: .pytest_cache
-rootdir: /home/jens/git/miffeltoffel/telegram.togabot
+rootdir: /home/jens/git/walkerjens/telegram.togabot
 collected 1 item
 
 tests/test_neweventcommand.py::NewEventCommandTest::test_getUpcomingThursdayDate PASSED                              [100%]

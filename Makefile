@@ -8,7 +8,7 @@ PYTEST:=pytest
 MYPY:=mypy
 
 API_TOKEN=OVERRIDE_ME
-DOCKER_IMAGE=miffeltoffel/telegram.togabot:latest
+DOCKER_IMAGE=walkerjens/telegram.togabot:latest
 VENV_PATH=venv
 
 export PYTHONPATH=$PYTHONPATH:./togabot
